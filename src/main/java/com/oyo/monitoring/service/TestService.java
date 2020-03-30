@@ -1,4 +1,4 @@
-package com.oyo.monitoring;
+package com.oyo.monitoring.service;
 
 import com.oyo.monitoring.annotation.MonitorMethod;
 import org.springframework.stereotype.Service;
