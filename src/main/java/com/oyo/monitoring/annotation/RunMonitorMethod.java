@@ -15,18 +15,16 @@ public class RunMonitorMethod {
     private static final Logger log = LoggerFactory.getLogger(RunMonitorMethod.class);
 
     @Around("@annotation(MonitorMethod)")
-    public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable{
+    public void logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable{
         long start = System.currentTimeMillis();
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         String methodName = methodSignature.getName();
-        Object proceed=null;
         try{
-            proceed = joinPoint.proceed();
+            joinPoint.proceed();
         }catch (Exception e){
             log.info(methodName + e.getMessage());
             throw e;
         }
         log.info("Method - " + methodName + " executed in {} ms", (System.currentTimeMillis() -start));
-        return proceed;
     }
 }
